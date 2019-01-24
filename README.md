@@ -1,8 +1,8 @@
 # Primordial Particle System 
 
 
-##Dependencies
+### Dependencies
 -[CImg](http://cimg.eu/)
 
-##Compile
+### Compile
 `g++ *.cpp -L/usr/X11R6/lib -lm -lpthread -lX11 -fopenmp -O2`
