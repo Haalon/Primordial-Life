@@ -41,8 +41,8 @@ class Field
 
 	int count;
 
-	double alpha = PI;
-	double beta = PI/180*17;
+	double alpha;
+	double beta;
 	double vel = 0.67*10;
 	double rad = 25;
 
@@ -54,7 +54,7 @@ public:
 	long step = 0;
 	cimg_library::CImg<unsigned char>* img;
 
-	Field(int w, int h, int c);
+	Field(int w, int h, int c, double a, double b);
 	~Field();
 
 	void preUpdateOne(int indx);

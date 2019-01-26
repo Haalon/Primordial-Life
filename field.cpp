@@ -25,7 +25,7 @@ Vector2 torus_dl(Vector2 v1, Vector2 v2, double w, double h) //shortest path on 
 	return Vector2(nx,ny);
 }
 
-Field::Field(int w, int h, int c) : width(w), height(h), count(c) 
+Field::Field(int w, int h, int c, double a, double b) : width(w), height(h), count(c), alpha(a), beta(b)
 {
 	body = new Particle*[count];
 	body2 = new Particle*[count];
