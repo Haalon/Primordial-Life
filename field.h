@@ -37,8 +37,6 @@ class Field
 	int height;
 
 	Particle ** body;
-	Particle ** body2;
-
 	int count;
 
 	double alpha;
@@ -57,7 +55,7 @@ public:
 	Field(int w, int h, int c, double a, double b);
 	~Field();
 
-	void preUpdateOne(int indx);
+	void updateOne(int indx);
 	void update();
 	
 

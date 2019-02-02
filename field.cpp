@@ -7,6 +7,11 @@
 using namespace cimg_library;
 using namespace std;
 
+double rnd()
+{
+	return (double)rand()/RAND_MAX;
+}
+
 Vector2 torus_dl(Vector2 v1, Vector2 v2, double w, double h) //shortest path on torus
 {
 	double nx,ny;
@@ -28,17 +33,15 @@ Vector2 torus_dl(Vector2 v1, Vector2 v2, double w, double h) //shortest path on 
 Field::Field(int w, int h, int c, double a, double b) : width(w), height(h), count(c), alpha(a), beta(b)
 {
 	body = new Particle*[count];
-	body2 = new Particle*[count];
 
 	srand(time(0));
 	img = new CImg<unsigned char>(w,h,1,3);
 
 	for (int i = 0; i < count; ++i)
 	{
-
 		// body[i] = new Particle(width/2.0 + (double)rand()/RAND_MAX, height/2.0 +(double)rand()/RAND_MAX, (double)rand()/RAND_MAX *2 * PI);
-		body[i] = new Particle((double)rand()/RAND_MAX * width, (double)rand()/RAND_MAX * height, (double)rand()/RAND_MAX *2 * PI );
-		body2[i] = new Particle();			
+		body[i] = new Particle( rnd() * width, rnd() * height, rnd()*PI*2);
+			
 	}
 }
 Field::~Field()
@@ -46,13 +49,11 @@ Field::~Field()
 	for (int i = 0; i < count; ++i)
 	{
 		delete body[i];
-		delete body2[i];
 	}
 	delete[] body;
-	delete[] body2;
 }
 
-void Field::preUpdateOne(int indx)
+void Field::updateOne(int indx)
 {
 
 	int l=0, r = 0;
@@ -77,19 +78,19 @@ void Field::preUpdateOne(int indx)
 	// double da = l > r ? beta * l/(r+1) : -beta * r/(l+1);
 	// double da = l > r ? beta * l : -beta * r;
 
-	body2[indx]->pos = body[indx]->pos + dl;
-	body2[indx]->ang = body[indx]->ang + da + alpha;
-	body2[indx]->N = l + r;
+	body[indx]->pos = body[indx]->pos + dl;
+	body[indx]->ang = body[indx]->ang + da + alpha;
+	body[indx]->N = l + r;
 
-	if(body2[indx]->pos.x < 0)
-		body2[indx]->pos.x+=width;
-	else if(body2[indx]->pos.x > width)
-		body2[indx]->pos.x-=width;
+	if(body[indx]->pos.x < 0)
+		body[indx]->pos.x+=width;
+	else if(body[indx]->pos.x > width)
+		body[indx]->pos.x-=width;
 
-	if(body2[indx]->pos.y < 0)
-		body2[indx]->pos.y+=height;
-	else if(body2[indx]->pos.y > height)
-		body2[indx]->pos.y-=height;
+	if(body[indx]->pos.y < 0)
+		body[indx]->pos.y+=height;
+	else if(body[indx]->pos.y > height)
+		body[indx]->pos.y-=height;
 }
 
 void Field::update()
@@ -97,12 +98,8 @@ void Field::update()
 	
 	#pragma omp parallel for 
 	for (int i = 0; i < count; ++i)		
-		preUpdateOne(i);
+		updateOne(i);
 	
-
-	auto temp = body;
-	body = body2;
-	body2 = temp;
 
 	step++;
 

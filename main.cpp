@@ -92,7 +92,7 @@ int main(int argc, char const *argv[])
 	double time = 0;
 	while (!main_disp.is_closed() )
     {
-    	// main_disp.wait(20);
+    	main_disp.wait(20);
     	double start = omp_get_wtime();
     	fld.update();
     	time +=  (omp_get_wtime() - start)*1000;
