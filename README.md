@@ -1,12 +1,17 @@
 # Primordial Particle System 
 
+<p align="center"><img alt="main gif" src="https://i.imgur.com/FgYYJZb.gif"></p>
+<p align="center"><img alt="main gif" src="https://i.imgur.com/wGpCqbZ.gif"></p>
+
 Based on this [article](https://www.nature.com/articles/srep37969)
 
 ### Dependencies
 * [CImg](http://cimg.eu/)
 
-### Compile
-`g++ *.cpp -L/usr/X11R6/lib -lm -lpthread -lX11 -fopenmp -O2`
+### Build
+* get [CImg](http://cimg.eu/)
+* put `Cimg.h` from the downloaded archive into the project folder
+* compile with`g++ *.cpp -L/usr/X11R6/lib -lm -lpthread -lX11 -fopenmp -O2`
 
 ### Parameters
 
