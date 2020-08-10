@@ -1,6 +1,6 @@
 # Primordial Particle System 
 
-<p align="center"><img alt="main gif" src="https://i.imgur.com/ZFUiGB7.gif"></p>
+
 <p align="center"><img alt="main gif" src="https://i.imgur.com/5MPUWTY.gif"></p>
 
 Based on this [article](https://www.nature.com/articles/srep37969)
